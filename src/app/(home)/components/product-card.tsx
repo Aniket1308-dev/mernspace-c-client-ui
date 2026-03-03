@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/dialog';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
+import ToppingList from './topping-list';
 
 
 export type Product = {
@@ -140,6 +141,7 @@ const ProductCard = ({ product }: PropTypes) => {
                                         </div>
                                     </RadioGroup>
                                 </div>
+                                <ToppingList />
                             </div>
                         </div>
                     </DialogContent>
