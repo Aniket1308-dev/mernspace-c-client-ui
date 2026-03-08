@@ -18,12 +18,7 @@ const ProductModal = ({ product }: { product: Product }) => {
             <DialogContent className="max-w-3xl p-0">
                 <div className="flex">
                     <div className="w-1/3 bg-white rounded p-8 flex items-center justify-center">
-                        <Image
-                            src={'/pizza-main.png'}
-                            width={450}
-                            height={450}
-                            alt={product.name}
-                        />
+                        <Image src={product.image} width={450} height={450} alt={product.name} />
                     </div>
                     <div className="w-2/3 p-8">
                         <h3 className="text-xl font-bold">{product.name}</h3>
