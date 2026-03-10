@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 import { ShoppingCart } from 'lucide-react';
-import React from 'react';
+import React, { Suspense } from 'react';
 import ToppingList from './topping-list';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Product } from '@/lib/types';
@@ -59,7 +59,9 @@ const ProductModal = ({ product }: { product: Product }) => {
                             );
                         })}
 
-                        <ToppingList />
+                        <Suspense fallback={'Toppings loading...'}>
+                            <ToppingList />
+                        </Suspense>
 
                         <div className="flex items-center justify-between mt-12">
                             <span className="font-bold">₹400</span>
