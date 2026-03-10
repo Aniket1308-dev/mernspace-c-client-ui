@@ -1,25 +1,36 @@
-'use client';
-import React from 'react';
-import ToppingCard, { Topping } from './topping-card';
+import React, { useEffect, useState } from 'react';
+import ToppingCard from './topping-card';
+import { Topping } from '@/lib/types';
 
-const toppings = [
-    { id: '1', name: 'Chicken', image: '/chicken.png', price: 50, isAvailable: true },
-    { id: '2', name: 'jelapeno', image: '/Jelapeno.png', price: 50, isAvailable: true },
-    { id: '3', name: 'Cheese', image: '/cheese.png', price: 50, isAvailable: true },
-];
+const ToppingList = async () => {
+    const [toppings, setToppings] = useState<Topping[]>([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const toppingResponse = await fetch(
+                // todo: make tenantId dynamic
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/catalog/toppings?tenantId=2`
+            );
+            const toppings = await toppingResponse.json();
+            setToppings(toppings);
+            console.log('toppings', toppings);
+        };
+        fetchData();
+    }, []);
 
-const ToppingList = () => {
-    const [selectedToppings, setSelectedToppings] = React.useState([toppings[0]]);
+
+    const [selectedToppings, setSelectedToppings] = React.useState<Topping[]>([]);
 
     const handleCheckBoxCheck = (topping: Topping) => {
-        const isAlreadyExists = selectedToppings.some((element) => element.id === topping.id);
+        const isAlreadyExists = selectedToppings.some(
+            (element: Topping) => element.id === topping.id
+        );
 
         if (isAlreadyExists) {
-            setSelectedToppings((prev) => prev.filter((elm) => elm.id !== topping.id));
+            setSelectedToppings((prev) => prev.filter((elm: Topping) => elm.id !== topping.id));
             return;
         }
 
-        setSelectedToppings((prev) => [...prev, topping]);
+        setSelectedToppings((prev: Topping[]) => [...prev, topping]);
     };
 
     return (
