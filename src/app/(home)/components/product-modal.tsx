@@ -34,7 +34,7 @@ const ProductModal = ({ product }: { product: Product }) => {
 
    const totalPrice = React.useMemo(() => {
         const toppingsTotal = selectedToppings.reduce((acc, curr) => acc + curr.price, 0);
-        console.log('product', product);
+
         const configPricing = Object.entries(chosenConfig).reduce(
             (acc, [key, value]: [string, string]) => {
                 const price = product.priceConfiguration[key].availableOptions[value];
