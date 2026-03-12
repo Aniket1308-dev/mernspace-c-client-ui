@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
-import { ShoppingCart } from 'lucide-react';
+import { CircleCheck, ShoppingCart } from 'lucide-react';
 import React, { startTransition, Suspense, useState } from 'react';
 import ToppingList from './topping-list';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -12,6 +12,18 @@ import { Label } from '@/components/ui/label';
 import { useAppDispatch, useAppSelector } from '@/lib/store/hooks';
 import { addToCart, CartItem } from '@/lib/store/features/cart/cartSlice';
 import { hashTheItem } from '@/lib/utils';
+import { useToast } from '@/components/ui/use-toast';
+
+const SucessToast = () => {
+    return (
+        <>
+            <div className="flex items-center gap-2">
+                <CircleCheck className="text-green-700" />
+                <span className="font-bold">Added to cart</span>
+            </div>
+        </>
+    );
+};
 
 
 type ChosenConfig = {
@@ -19,6 +31,8 @@ type ChosenConfig = {
 };
 
 const ProductModal = ({ product }: { product: Product }) => {
+    const { toast } = useToast();
+
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const cartItems = useAppSelector((state) => state.cart.cartItems);
@@ -97,7 +111,10 @@ const ProductModal = ({ product }: { product: Product }) => {
         dispatch(addToCart(itemToAdd));
         setSelectedToppings([]);
         setDialogOpen(false);
-
+        toast({
+            // @ts-ignore
+            title: <SucessToast />,
+        });
     };
     
     const handleRadioChange = (key: string, data: string) => {
