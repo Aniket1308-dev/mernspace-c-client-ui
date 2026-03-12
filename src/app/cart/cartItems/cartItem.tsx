@@ -40,7 +40,11 @@ const CartItem = ({ item }: { item: Item }) => {
                     </div>
                     <div className="flex">
                         <div className="font-bold w-12">&#8377;300</div>
-                        <button className="ml-4" onClick={() => {}}>
+                        <button
+                            className="ml-4"
+                            onClick={() => {
+                                dispatch(changeQty({ hash: item.hash as string, qty: 0 }));
+                            }}>
                             <X />
                         </button>
                     </div>
