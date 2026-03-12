@@ -1,10 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
 import QtyChanger from './qtyChanger';
-import { CartItem as Item } from '@/lib/store/features/cart/cartSlice';
+import { changeQty, CartItem as Item } from '@/lib/store/features/cart/cartSlice';
 import { X } from 'lucide-react';
+import { useAppDispatch } from '@/lib/store/hooks';
 
 const CartItem = ({ item }: { item: Item }) => {
+    const dispatch = useAppDispatch();
+
     return (
         <>
             <div className="grid grid-cols-2">
@@ -28,7 +31,12 @@ const CartItem = ({ item }: { item: Item }) => {
                 </div>
                 <div className="flex items-center gap-4 justify-between">
                     <div>
-                        <QtyChanger handleQtyChange={() => {}}>{item.qty}</QtyChanger>
+                        <QtyChanger
+                            handleQtyChange={(data) => {
+                                dispatch(changeQty({ hash: item.hash as string, qty: data }));
+                            }}>
+                            {item.qty}
+                        </QtyChanger>
                     </div>
                     <div className="flex">
                         <div className="font-bold w-12">&#8377;300</div>
