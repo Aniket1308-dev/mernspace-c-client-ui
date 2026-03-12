@@ -3,7 +3,8 @@ import React from 'react';
 import ProductCard from './product-card';
 import { Category, Product } from '@/lib/types';
 
-const ProductList = async () => {
+const ProductList = async ({ searchParams }: { searchParams: { restaurantId: string } }) => {
+    console.log('searchParams', searchParams.restaurantId);
     // todo: do concurrent requests -> Promise.all()
     const categoryResponse = await fetch(`${process.env.BACKEND_URL}/api/catalog/categories`, {
         next: {
@@ -19,8 +20,7 @@ const ProductList = async () => {
 
     // todo: add pagination
     const productsResponse = await fetch(
-        // todo: add dynamic tenantId
-        `${process.env.BACKEND_URL}/api/catalog/products?perPage=100&tenantId=2`,
+        `${process.env.BACKEND_URL}/api/catalog/products?perPage=100&tenantId=${searchParams.restaurantId}`,
         {
             next: {
                 revalidate: 3600, // 1 hour

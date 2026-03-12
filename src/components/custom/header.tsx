@@ -5,6 +5,7 @@ import { Phone } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Tenant } from '@/lib/types';
 import dynamic from 'next/dynamic';
+import TenantSelect from './tenant-select';
 
 const CartCounterWithoutSSR = dynamic(() => import('./cart-counter'), { ssr: false });
 
@@ -38,20 +39,7 @@ const Header = async () => {
                             fill="#484848"
                         />
                     </svg>
-                    <Select>
-                        <SelectTrigger className="w-[180px] focus:ring-0">
-                            <SelectValue placeholder="Select Restaurant" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {restaurants.data.map((restaurant) => {
-                                return (
-                                    <SelectItem key={restaurant.id} value={restaurant.id}>
-                                        {restaurant.name}
-                                    </SelectItem>
-                                );
-                            })}
-                        </SelectContent>
-                    </Select>
+                    <TenantSelect restaurants={restaurants} />
                 </div>
                 <div className="flex items-center gap-x-4">
                     <ul className="flex items-center font-medium space-x-4">
