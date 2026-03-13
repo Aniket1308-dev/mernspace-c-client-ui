@@ -80,12 +80,12 @@ const Login = () => {
                                 </div>
                                 <Input id="password" name="password" type="password" required />
                             </div>
-                            <SubmitButton state={state} />
+                            <SubmitButton />
                         </div>
                     </form>
                     <div className="mt-4 text-center text-sm">
                         Don&apos;t have an account?{' '}
-                        <Link href="/signup" className="underline">
+                        <Link href="/register" className="underline">
                             Sign up
                         </Link>
                     </div>
