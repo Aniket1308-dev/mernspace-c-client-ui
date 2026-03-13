@@ -26,7 +26,7 @@ export default async function login(prevState: any, formdata: FormData) {
             console.log('error', error);
             return {
                 type: 'error',
-                message: error.errors[0].message,
+                message: error.errors[0].msg,
             };
         }
 
