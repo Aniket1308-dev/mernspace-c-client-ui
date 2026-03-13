@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^2.2.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "cookie": "^0.6.0",
     "crypto-js": "^4.2.0",
     "lucide-react": "^0.367.0",
     "next": "14.1.4",
@@ -29,6 +30,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/cookie": "^0.6.0",
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^20",
     "@types/react": "^18",
