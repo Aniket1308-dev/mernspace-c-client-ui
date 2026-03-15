@@ -9,6 +9,7 @@ import React from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import login from '@/lib/actions/login';
 import { LoaderCircle } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 
 const SubmitButton = () => {
     const { pending } = useFormStatus();
@@ -33,10 +34,13 @@ const initialState = {
 };
 
 const Login = () => {
+    const searchParams = useSearchParams();
+    const returnTo = searchParams.get('return-to');
+
     const [state, formAction] = useFormState(login, initialState);
 
     if (state.type === 'success') {
-        window.location.href = '/';
+        window.location.href = returnTo ? returnTo : '/';
     }
 
 
