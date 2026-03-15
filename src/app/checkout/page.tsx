@@ -13,9 +13,17 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
+import { getSession } from '@/lib/session';
 import { Coins, CreditCard, Plus } from 'lucide-react';
+import { redirect } from 'next/navigation';
 
-export default function Checkout() {
+export default async function Checkout() {
+    const session = await getSession();
+
+    if (!session) {
+        redirect('/login');
+    }
+
     return (
         <div className="flex container gap-6 mt-16">
             <Card className="w-3/5 border-none">
