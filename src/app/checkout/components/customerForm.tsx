@@ -16,6 +16,7 @@ import AddAdress from './addAddress';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import OrderSummary from './orderSummary';
 
 const formSchema = z.object({
     address: z.string({ required_error: 'Please select an address.' }),
@@ -221,46 +222,7 @@ const CustomerForm = () => {
                             </div>
                         </CardContent>
                     </Card>
-                    <Card className="w-2/5 border-none h-auto self-start">
-                        <CardHeader>
-                            <CardTitle>Order summary</CardTitle>
-                        </CardHeader>
-                        <CardContent className="grid gap-4 pt-6">
-                            <div className="flex items-center justify-between">
-                                <span>Subtotal</span>
-                                <span className="font-bold">₹8130</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                                <span>Taxes</span>
-                                <span className="font-bold">₹82</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                                <span>Delivery charges</span>
-                                <span className="font-bold">₹100</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                                <span>Discount</span>
-                                <span className="font-bold">₹0</span>
-                            </div>
-                            <hr />
-                            <div className="flex items-center justify-between">
-                                <span className="font-bold">Order total</span>
-                                <span className="font-bold">₹8300</span>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <Input
-                                    id="fname"
-                                    type="text"
-                                    className="w-full"
-                                    placeholder="Coupon code"
-                                />
-                                <Button variant={'outline'}>Apply</Button>
-                            </div>
-                            <div className="text-right mt-6">
-                                <Button>Place order</Button>
-                            </div>
-                        </CardContent>
-                    </Card>
+                    <OrderSummary />
                 </div>
             </form>
         </Form>
