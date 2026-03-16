@@ -48,10 +48,12 @@ const AddAdress = ({ customerId }: { customerId: string | undefined }) => {
         },
     });
 
-    const handleAddressAdd = (data: z.infer<typeof formSchema>) => {
-        console.log('data', data);
+    const handleAddressAdd = (e: React.FormEvent<HTMLFormElement>) => {
+        e.stopPropagation();
 
-        mutate(data.address);
+        return addressForm.handleSubmit((data: z.infer<typeof formSchema>) => {
+            mutate(data.address);
+        })(e);
     };
 
     // todo: Display error if any (useMutation -> isError)
@@ -65,7 +67,7 @@ const AddAdress = ({ customerId }: { customerId: string | undefined }) => {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <Form {...addressForm}>
-                    <form onSubmit={addressForm.handleSubmit(handleAddressAdd)}>
+                    <form onSubmit={handleAddressAdd}>
                         <DialogHeader>
                             <DialogTitle>Add Address</DialogTitle>
                             <DialogDescription>
