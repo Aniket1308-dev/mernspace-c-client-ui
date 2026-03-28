@@ -14,7 +14,11 @@ const TAXES_PERCENTAGE = 18;
 // todo: Move this to the server (Order service).
 const DELIVERY_CHARGES = 100;
 
-const OrderSummary = () => {
+const OrderSummary = ({
+    handleCouponCodeChange,
+}: {
+    handleCouponCodeChange: (code: string) => void;
+}) => {
     const searchParam = useSearchParams();
     const cart = useAppSelector((state) => state.cart.cartItems);
 
@@ -70,11 +74,13 @@ const OrderSummary = () => {
         onSuccess: (data) => {
             if (data.valid) {
                 setDiscountError('');
+                handleCouponCodeChange(couponCodeRef.current ? couponCodeRef.current.value : '');
                 setDiscountPercentage(data.discount);
                 return;
             }
 
             setDiscountError('Coupon is invalid');
+            handleCouponCodeChange('');
             setDiscountPercentage(0);
         },
     });
