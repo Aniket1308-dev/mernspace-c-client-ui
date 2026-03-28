@@ -41,6 +41,13 @@ const Refresher = ({ children }: { children: React.ReactNode }) => {
                 `Scheduled refresh time: ${new Date(currentTime + refreshTime).toISOString()}`
             );
 
+            // todo: [bug/limitation]
+            // The value of refreshTime should be equal or less than MAXIMUM_SAFE_INTEGER which is 2,147,483,647 (32 bit signed int)
+            // If it exceeds then the settimeout won't work as expected, instead it will be triggered asap.
+            // So in our case if the duration of jwt is more than 24 days then the number exceeds the max safe int value.
+            // IMPORTANT: FIND ANOTHER SOLUTION OR DON'T MAKE JWT GREATER THAN 24 days.
+
+
             timeoutId.current = setTimeout(() => {
                 refreshAccessToken();
                 console.log('Access token is refreshing...');
