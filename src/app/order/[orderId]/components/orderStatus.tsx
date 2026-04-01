@@ -1,6 +1,9 @@
 'use client';
 
 import { Step, StepItem, Stepper, useStepper } from '@/components/stepper';
+import { getSingleOrder } from '@/lib/http/api';
+import { Order } from '@/lib/types';
+import { useQuery } from '@tanstack/react-query';
 import { CheckCheck, FileCheck, Microwave, Package, PackageCheck } from 'lucide-react';
 import React from 'react';
 
@@ -12,25 +15,42 @@ const steps = [
     { label: 'Delivered', icon: CheckCheck, description: 'Order completed' },
 ] satisfies StepItem[];
 
-const StepperChanger = () => {
-    const { setStep, nextStep } = useStepper();
+const statusMapping = {
+    received: 0,
+    confirmed: 1,
+    prepared: 2,
+    out_for_deliver: 3,
+    delivered: 4,
+} as { [key: string]: number };
+
+const StepperChanger = ({ orderId }: { orderId: string }) => {
+    const { setStep } = useStepper();
+
+    const { data } = useQuery<Order>({
+        queryKey: ['order', orderId],
+        queryFn: async () => {
+            return await getSingleOrder(orderId).then((res) => res.data);
+        },
+        refetchInterval: 1000 * 30, // every 30 secs.
+    });
 
     React.useEffect(() => {
-        setInterval(() => {
-            nextStep();
-        }, 2000);
-    }, []);
+        if (data) {
+            const currentStep = statusMapping[data.orderStatus] || 0;
+            setStep(currentStep + 1);
+        }
+    }, [data]);
     return <></>;
 };
 
 
-const OrderStatus = () => {
+const OrderStatus = ({ orderId }: { orderId: string }) => {
     return (
         <Stepper initialStep={0} steps={steps} variant="circle-alt" className="py-8">
             {steps.map(({ label, icon }) => {
-                return <Step label={label} icon={icon} checkIcon={icon}></Step>;
+                return <Step label={label} icon={icon} checkIcon={icon} key={label}></Step>;
             })}
-            <StepperChanger />
+            <StepperChanger orderId={orderId} />
         </Stepper>
     );
 };

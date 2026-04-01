@@ -30,7 +30,7 @@ const SingleOrder = async ({ params }: { params: { orderId: string } }) => {
                     <CardDescription>Track the order status. </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <OrderStatus />
+                    <OrderStatus orderId={order._id} />
                 </CardContent>
             </Card>
 
