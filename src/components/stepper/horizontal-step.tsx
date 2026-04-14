@@ -110,4 +110,5 @@ const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
 	},
 );
 
+HorizontalStep.displayName = "HorizontalStep";
 export { HorizontalStep };

@@ -179,5 +179,6 @@ const HorizontalContent = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
+Stepper.displayName = "Stepper";
 export { Stepper, Step, useStepper };
 export type { StepProps, StepperProps, StepItem };

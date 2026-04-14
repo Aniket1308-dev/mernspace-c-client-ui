@@ -5,6 +5,7 @@ import * as React from "react";
 import type { IconType } from "./types";
 import { useStepper } from "./use-stepper";
 
+
 interface StepIconProps {
 	isCompletedStep?: boolean;
 	isCurrentStep?: boolean;
@@ -128,5 +129,5 @@ const StepIcon = React.forwardRef<HTMLDivElement, StepIconProps>(
 		]);
 	},
 );
-
+StepIcon.displayName = "StepIcon";
 export { StepIcon };
