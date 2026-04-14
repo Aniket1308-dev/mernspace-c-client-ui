@@ -54,9 +54,7 @@ const Payment = ({
                             <div className="flex items-center gap-2">
                                 <LayoutDashboard size={20} />
                                 <h2 className="text-base font-medium">Order reference: </h2>
-                                <Link
-                                    href={`/order-status/${searchParams.orderId}`}
-                                    className="underline">
+                                <Link href={`/order/${searchParams.orderId}`} className="underline">
                                     {searchParams.orderId}
                                 </Link>
                             </div>
@@ -74,7 +72,7 @@ const Payment = ({
                 {isOrderSuccess ? (
                     <Button asChild className="mt-6">
                         <Link
-                            href={`/order-status/${searchParams.orderId}?restaurantId=${searchParams.restaurantId}`}
+                            href={`/order/${searchParams.orderId}?restaurantId=${searchParams.restaurantId}`}
                             className="flex items-center gap-2">
                             <ArrowLeft size={20} className="text-white" />
                             <span>Go to order status page</span>
