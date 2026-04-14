@@ -20,7 +20,7 @@ const ProductList = async ({ searchParams }: { searchParams: { restaurantId: str
 
     // todo: add pagination
     const productsResponse = await fetch(
-        `${process.env.BACKEND_URL}/api/catalog/products?perPage=100&tenantId=${searchParams.restaurantId}`,
+        `${process.env.BACKEND_URL}/api/catalog/products?perPage=100&limit=100&tenantId=${searchParams.restaurantId}`,
         {
             next: {
                 revalidate: 3600, // 1 hour
