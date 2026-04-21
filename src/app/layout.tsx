@@ -32,6 +32,17 @@ export default function RootLayout({
                     <QueryProvider>
                         <Refresher>
                             <Header />
+                            {/* Demo Banner */}
+                            <div className="bg-amber-400 text-black text-center py-2 px-4 text-sm font-medium sticky top-0 z-50">
+                                &#9888; Backend is currently offline.{' '}
+                                
+                                    <a href="https://youtu.be/7h4t78EJLWo?si=BVcRmvuBDffwcjo9"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="font-bold underline">
+                                    Watch the full demo here &rarr;
+                                </a>
+                            </div>
                             <main>{children}</main>
                             <Toaster />
                         </Refresher>
