@@ -18,17 +18,22 @@ export const getSession = async () => {
 };
 
 const getSelf = async (): Promise<Session | null> => {
-    const response = await fetch(`${process.env.BACKEND_URL}/api/auth/auth/self`, {
-        headers: {
-            Authorization: `Bearer ${cookies().get('accessToken')?.value}`,
-        },
-    });
+    try {
+        const response = await fetch(`${process.env.BACKEND_URL}/api/auth/auth/self`, {
+            headers: {
+                Authorization: `Bearer ${cookies().get('accessToken')?.value}`,
+            },
+        });
 
-    if (!response.ok) {
+        if (!response.ok) {
+            return null;
+        }
+
+        return {
+            user: (await response.json()) as User,
+        };
+    } catch (error) {
+        console.error('Failed to fetch session:', error);
         return null;
     }
-
-    return {
-        user: (await response.json()) as User,
-    };
 };
