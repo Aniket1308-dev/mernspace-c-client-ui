@@ -14,17 +14,19 @@ const CartCounterWithoutSSR = dynamic(() => import('./cart-counter'), { ssr: fal
 const Header = async () => {
     const session = await getSession();
 
+let restaurants: { data: Tenant[] } = { data: [] };
+
+try {
     const tenantsResponse = await fetch(`${process.env.BACKEND_URL}/api/auth/tenants?perPage=100`, {
-        next: {
-            revalidate: 3600, // 1 hour
-        },
+        next: { revalidate: 3600 },
     });
 
-    if (!tenantsResponse.ok) {
-        throw new Error('Failed to fetch tenants');
+    if (tenantsResponse.ok) {
+        restaurants = await tenantsResponse.json();
     }
-
-    const restaurants: { data: Tenant[] } = await tenantsResponse.json();
+} catch (error) {
+    console.error('Failed to fetch tenants:', error);
+}
 
     return (
         <header className="bg-white">
