@@ -1,11 +1,10 @@
 'use client';
-
+import React, { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Link from 'next/link';
 import Image from 'next/image';
-import React from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import login from '@/lib/actions/login';
 import { LoaderCircle } from 'lucide-react';
@@ -33,7 +32,7 @@ const initialState = {
     message: '',
 };
 
-const Login = () => {
+const LoginContent = () => {
     const searchParams = useSearchParams();
     const returnTo = searchParams.get('return-to');
 
@@ -106,6 +105,14 @@ const Login = () => {
                 />
             </div>
         </div>
+    );
+};
+
+const Login = () => {
+    return (
+        <Suspense>
+            <LoginContent />
+        </Suspense>
     );
 };
 

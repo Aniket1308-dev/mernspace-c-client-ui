@@ -1,4 +1,5 @@
 'use client';
+import { Suspense } from 'react'; 
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -32,7 +33,7 @@ const initialState = {
 };
 
 
-export default function SignUpPage() {
+function SignUpContent() {
 
     const [state, formAction] = useFormState(register, initialState);
 
@@ -117,5 +118,13 @@ export default function SignUpPage() {
                 />
             </div>
         </div>
+    );
+}
+
+export default function SignUpPage() {
+    return (
+        <Suspense>
+            <SignUpContent />
+        </Suspense>
     );
 }
