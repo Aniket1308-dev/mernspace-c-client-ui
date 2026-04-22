@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -24,7 +25,7 @@ export default async function Checkout({
 }: {
     searchParams: { restaurantId: string };
 }) {
-    const session = await getSession();
+    // const session = await getSession();
 
     const sParams = new URLSearchParams(searchParams);
     const existingQueryString = sParams.toString();
@@ -33,9 +34,9 @@ export default async function Checkout({
 
     // /login?return-to=/checkout?existingQueryString
 
-    if (!session) {
-        redirect(`/login?${sParams}`);
-    }
+    // if (!session) {
+    //     redirect(`/login?${sParams}`);
+    // }
 
     return <CustomerForm />;
 }

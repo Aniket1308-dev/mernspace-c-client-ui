@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import { Manrope } from 'next/font/google';
 import './globals.css';
@@ -30,7 +31,7 @@ export default function RootLayout({
                         manrope.variable
                     )}>
                     <QueryProvider>
-                        <Refresher>
+                        {/* <Refresher> */}
                             <Header />
                             {/* Demo Banner */}
                             <div className="bg-amber-400 text-black text-center py-2 px-4 text-sm font-medium sticky top-0 z-50">
@@ -45,7 +46,7 @@ export default function RootLayout({
                             </div>
                             <main>{children}</main>
                             <Toaster />
-                        </Refresher>
+                        {/* </Refresher> */}
                     </QueryProvider>
                 </body>
             </StoreProvider>

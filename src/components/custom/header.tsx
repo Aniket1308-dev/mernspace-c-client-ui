@@ -6,27 +6,27 @@ import { Button } from '../ui/button';
 import { Tenant } from '@/lib/types';
 import dynamic from 'next/dynamic';
 import TenantSelect from './tenant-select';
-import { getSession } from '@/lib/session';
-import Logout from './logout';
+// import { getSession } from '@/lib/session';
+// import Logout from './logout';
 
 const CartCounterWithoutSSR = dynamic(() => import('./cart-counter'), { ssr: false });
 
 const Header = async () => {
-    const session = await getSession();
+    // const session = await getSession();
 
 let restaurants: { data: Tenant[] } = { data: [] };
 
-try {
-    const tenantsResponse = await fetch(`${process.env.BACKEND_URL}/api/auth/tenants?perPage=100`, {
-        next: { revalidate: 3600 },
-    });
+// try {
+//     const tenantsResponse = await fetch(`${process.env.BACKEND_URL}/api/auth/tenants?perPage=100`, {
+//         next: { revalidate: 3600 },
+//     });
 
-    if (tenantsResponse.ok) {
-        restaurants = await tenantsResponse.json();
-    }
-} catch (error) {
-    console.error('Failed to fetch tenants:', error);
-}
+//     if (tenantsResponse.ok) {
+//         restaurants = await tenantsResponse.json();
+//     }
+// } catch (error) {
+//     console.error('Failed to fetch tenants:', error);
+// }
 
     return (
         <header className="bg-white">
@@ -67,13 +67,18 @@ try {
                         <Phone />
                         <span>+91 9800 098 998</span>
                     </div>
-                    {session ? (
+                    {/* {session ? (
                         <Logout />
                     ) : (
                         <Button size={'sm'} asChild>
                             <Link href="/login">Login</Link>
                         </Button>
-                    )}
+                    )} */}
+
+                    <Button size={'sm'} asChild>
+                        <Link href="/login">Login</Link>
+                    </Button>
+
                 </div>
             </nav>
         </header>
